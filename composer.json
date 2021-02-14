@@ -8,7 +8,15 @@
             "email": "pavelkonoplyanikov@yandex.by"
         }
     ],
+    "bin": [
+        "bin/gendiff"
+    ],
     "require": {
         "docopt/docopt": "^1.0"
+    },
+    "autoload":{
+        "files": [
+            "src/cli.php"
+            ]
     }
 }
