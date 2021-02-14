@@ -1,0 +1,14 @@
+{
+    "name": "hexlet/code",
+    "description": "Вычислитель отличий",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Konpa",
+            "email": "pavelkonoplyanikov@yandex.by"
+        }
+    ],
+    "require": {
+        "docopt/docopt": "^1.0"
+    }
+}
