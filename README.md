@@ -4,3 +4,7 @@
 1 step
 
 [![asciicast](https://asciinema.org/a/QhZIATFfxxPw9pNKcVuc4RtDU.svg)](https://asciinema.org/a/QhZIATFfxxPw9pNKcVuc4RtDU)
+
+2 step
+
+[![asciicast](https://asciinema.org/a/MDTi15mXq5FE8U79Nxnacf5Wg.svg)](https://asciinema.org/a/MDTi15mXq5FE8U79Nxnacf5Wg)
