@@ -3,4 +3,4 @@
 
 1 step
 
-https://asciinema.org/a/QhZIATFfxxPw9pNKcVuc4RtDU
+[![asciicast](https://asciinema.org/a/QhZIATFfxxPw9pNKcVuc4RtDU.svg)](https://asciinema.org/a/QhZIATFfxxPw9pNKcVuc4RtDU)
