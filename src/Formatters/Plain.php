@@ -4,11 +4,11 @@ namespace Php\Project\Lvl2\Formatters\Plain;
 
 const INDENT = '  ';
 
-use const Differ\Parsers\ST_KEEP;
-use const Differ\Parsers\ST_NEW;
-use const Differ\Parsers\ST_OLD;
-use const Differ\Parsers\ST_CHANGE;
-use const Differ\Parsers\ST_TEXT;
+use const Php\Project\Lvl2\Parsers\ST_KEEP;
+use const Php\Project\Lvl2\Parsers\ST_NEW;
+use const Php\Project\Lvl2\Parsers\ST_OLD;
+use const Php\Project\Lvl2\Parsers\ST_CHANGE;
+use const Php\Project\Lvl2\Parsers\ST_TEXT;
 
 /**
  * @param mixed $value
