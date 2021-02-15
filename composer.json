@@ -2,6 +2,7 @@
     "name": "hexlet/code",
     "description": "Вычислитель отличий",
     "type": "project",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Konpa",

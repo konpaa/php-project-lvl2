@@ -12,6 +12,7 @@ autoload:
 
 lint:
 	composer run-script phpcs -- --standard=PSR12 src bin tests
+
 stan:
 	composer exec -v phpstan analyse -- -c ./phpstan.neon --ansi
 
