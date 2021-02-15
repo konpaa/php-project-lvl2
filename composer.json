@@ -20,12 +20,15 @@
     "autoload":{
         "psr-4": { "Php\\Project\\Lvl2\\": "tests/" },
         "files": [
-            "src/Differ.php",
-            "src/Formatters.php",
-            "src/Formatters/Json.php",
-            "src/Formatters/Plain.php",
-            "src/Formatters/Stylish.php",
-            "src/Parsers.php"
+            "src/cli.php",
+            "src/gendiff.php",
+            "src/readfile.php",
+            "src/parsers.php",
+            "src/ast.php",
+            "src/path.php",
+            "src/Formatters/pretty.php",
+            "src/Formatters/plain.php",
+            "src/Formatters/json.php"
             ]
     },
     "require-dev": {
@@ -36,6 +39,9 @@
         "hexlet/phpstan-fp": "^1.1"
     },
     "scripts": {
-        "phpcs": "vendor/bin/phpcs"
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf",
+        "phpunit": "phpunit",
+        "test": "phpunit tests"
     }
 }
