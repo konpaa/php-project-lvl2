@@ -1,15 +1,34 @@
 #!/usr/bin/env php
-
 <?php
 
-use function Php\Project\Lvl2\cli\run;
+use function Php\Project\Lvl2\Differ\genDiff;
 
-$autoloadPath1 = __DIR__ . '/../../../autoload.php';
-$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
-if (file_exists($autoloadPath1)) {
-    require_once $autoloadPath1;
+$autoloadPathGlobal = __DIR__ . '/../../../autoload.php';
+$autoloadPathLocal = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoloadPathGlobal)) {
+    require_once $autoloadPathGlobal;
 } else {
-    require_once $autoloadPath2;
+    require_once $autoloadPathLocal;
 }
 
-run();
+$doc = <<<DOC
+Usage:
+  gendiff (-h|--help)
+  gendiff (-v|--version)
+  gendiff [--format <fmt>] <firstFile> <secondFile>
+
+Options:
+  -h --help                     Show this screen
+  -v --version                  Show version
+  --format <fmt>                Report format [default: pretty]
+
+DOC;
+
+$args = Docopt::handle($doc, ['version' => 'Generate json.diff 1.5']);
+
+$format = $args['--format'];
+$pathToFile1 = $args['<firstFile>'] ?? null;
+$pathToFile2 = $args['<secondFile>'] ?? null;
+
+echo genDiff($pathToFile1, $pathToFile2, $format);
+echo "\n";
