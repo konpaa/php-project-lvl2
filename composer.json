@@ -17,6 +17,7 @@
         "symfony/yaml": "^5.2"
     },
     "autoload":{
+        "psr-4": { "Php\\Project\\Lvl2\\": "tests/" },
         "files": [
             "src/Differ.php",
             "src/Formatters.php",
