@@ -6,68 +6,30 @@ use PHPUnit\Framework\TestCase;
 
 use function Php\Project\Lvl2\gendiff\genDiff;
 
+const PATH_TO_BEFORE = '../tests/fixtures/before.';
+const PATH_TO_AFTER = '../tests/fixtures/after.';
+const PATH_TO_RESULT = __DIR__ . '/fixtures/results/';
+
 class GenDiffTest extends TestCase
 {
     /**
-     * @dataProvider additionProviderFormats
+     * @dataProvider additionProvider
      */
-    public function testGenDiff($expect, $before, $after, $format = "pretty")
+
+    public function testGendiff($extension, $format)
     {
-        $fixtures = "tests/fixtures/";
-        $expected = file_get_contents("{$fixtures}{$expect}");
-        $diff = genDiff("{$fixtures}{$before}", "{$fixtures}{$after}", $format);
-        $this->assertEquals($expected, $diff);
+        $pathToFile1 = PATH_TO_BEFORE . $extension;
+        $pathToFile2 = PATH_TO_AFTER . $extension;
+        $expected = PATH_TO_RESULT . $format;
+        $this->assertEquals(file_get_contents($expected), genDiff($pathToFile1, $pathToFile2, $format));
     }
 
-    public function additionProviderFormats()
+    public function additionProvider()
     {
         return [
-            "testGenDiffJson" => [
-                "expect_pretty.txt",
-                "before.json",
-                "after.json"
-            ],
-            "testGenDiffJsonPretty" => [
-                "expect_pretty.txt",
-                "before.json",
-                "after.json",
-                "pretty"
-            ],
-            "testGenDiffJsonPlain" => [
-                "expect_plain.txt",
-                "before.json",
-                "after.json",
-                "plain"
-            ],
-            "testGenDiffJsonJson" => [
-                "expect_json.txt",
-                "before.json",
-                "after.json",
-                "json"
-            ],
-            "testGenDiffYaml" => [
-                "expect_pretty.txt",
-                "before.yaml",
-                "after.yaml"
-            ],
-            "testGenDiffYamlPretty" => [
-                "expect_pretty.txt",
-                "before.yaml",
-                "after.yaml",
-                "pretty"
-            ],
-            "testGenDiffYamlPlain" => [
-                "expect_plain.txt",
-                "before.yaml",
-                "after.yaml",
-                "plain"
-            ],
-            "testGenDiffYamlJson" => [
-                "expect_json.txt",
-                "before.yaml",
-                "after.yaml",
-                "json"
-            ]
+            ['json', 'pretty'],
+            ['yml', 'json'],
+            ['json', 'plain']
         ];
     }
 }

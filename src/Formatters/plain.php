@@ -2,49 +2,43 @@
 
 namespace Php\Project\Lvl2\Formatters\plain;
 
-use function Funct\Collection\flatten;
-
-function stringifyValue($value)
+function render($data, $path = '')
 {
-    $funcs = [
-        'object' => fn () => "complex value",
-        'boolean' => fn ($value) => json_encode($value)
-    ];
-
-    $type = gettype($value);
-    $isFunc = in_array($type, array_keys($funcs));
-    return $isFunc ? $funcs[$type]($value) : $value;
+    $arrResult = array_reduce($data, function ($acc, $value) use ($path) {
+        $status = $value['status'];
+        $name = $value['name'];
+        $oldValue = genValue($value['oldValue']);
+        $newValue = genValue($value['newValue']);
+        $children = $value['children'];
+        switch ($status) {
+            case 'nested':
+                $path .= "$name.";
+                $acc[] = render($value['children'], $path);
+                $path = '';
+                break;
+            case 'deleted':
+                $acc[] = "Property '{$path}{$name}' was removed";
+                break;
+            case 'added':
+                $acc[] = "Property '{$path}{$name}' was added with value: '{$oldValue}'";
+                break;
+            case 'changed':
+                $acc[] = "Property '{$path}{$name}' was changed. From '{$oldValue}' to '{$newValue}'";
+                break;
+        }
+        return $acc;
+    }, []);
+    $strResult = implode("\n", $arrResult);
+    return $strResult;
 }
 
-function format($ast)
+function genValue($value)
 {
-    $inner = function ($innerData, $nameGroup) use (&$inner) {
-
-        $mapper = function ($child) use ($nameGroup, $inner) {
-
-            $valueBefore = isset($child['valueBefore']) ? stringifyValue($child['valueBefore']) : null;
-            $valueAfter = isset($child['valueAfter']) ? stringifyValue($child['valueAfter']) : null;
-
-            switch ($child['type']) {
-                case 'unchanged':
-                    return;
-                case 'changed':
-                    return "Property '{$nameGroup}{$child['name']}' was changed. " .
-                        "From '{$valueBefore}' to '{$valueAfter}'";
-                case 'removed':
-                    return "Property '{$nameGroup}{$child['name']}' was removed";
-                case 'added':
-                    return "Property '{$nameGroup}{$child['name']}' was added with value: '{$valueAfter}'";
-                case 'nested':
-                    return $inner($child['children'], "{$child['name']}.");
-                default:
-                    throw new \Exception("Type \"{$child['type']}\" not supported.");
-            }
-        };
-        $mapped = array_map($mapper, $innerData);
-        $flattened = flatten($mapped);
-        $filtered = array_filter($flattened, fn ($value) => $value !== null, ARRAY_FILTER_USE_BOTH);
-        return join("\n", $filtered);
-    };
-    return $inner($ast, null);
+    if (is_array($value)) {
+        return "complex value";
+    } elseif (is_bool($value)) {
+        return $value ? 'true' : 'false';
+    } else {
+        return $value;
+    }
 }

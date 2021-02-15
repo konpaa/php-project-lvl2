@@ -2,30 +2,36 @@
 
 namespace Php\Project\Lvl2\cli;
 
-use Docopt;
+use function Php\Project\Lvl2\genDiff\genDiff;
 
-use function Php\Project\Lvl2\gendiff\genDiff;
-
-function run()
-{
-    $doc = <<<'DOCOPT'
+const DOCOPT = <<<'DOCOPT'
 Generate diff
 
 Usage:
-  gendiff (-h|--help)
-  gendiff (-v|--version)
-  gendiff [--format <fmt>] <firstFile> <secondFile>
+    gendiff (-h|--help)
+    gendiff (-v|--version)
+    gendiff [--format <fmt>] <firstFile> <secondFile>
 
-  Options:
-  -h --help                     Show this screen
-  -v --version                  Show version
-  --format <fmt>                Report format [default: pretty]
-
+Options:
+    -h --help                     Show this screen
+    -v --version                  Show version
+    --format <fmt>                Report format [default: pretty]
 DOCOPT;
 
-    $result = Docopt::handle($doc, array('version' => '0.0.1'));
-    $diff = genDiff($result->args["<firstFile>"], $result->args["<secondFile>"], $result->args["--format"]);
-    echo $diff;
-    echo "\n";
+function run()
+{
+    $docopt = getArgs(DOCOPT);
+    $pathToFile1 = $docopt['<firstFile>'];
+    $pathToFile2 = $docopt['<secondFile>'];
+    $format = $docopt['--format'];
+    try {
+        print_r(genDiff($pathToFile1, $pathToFile2, $format));
+    } catch (\Exception $e) {
+        print_r($e->getMessage());
+    }
 }
 
+function getArgs($content)
+{
+    return \Docopt::handle($content, ['version' => '1.0.0']);
+}

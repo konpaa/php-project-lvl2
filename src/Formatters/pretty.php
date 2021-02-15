@@ -2,65 +2,63 @@
 
 namespace Php\Project\Lvl2\Formatters\pretty;
 
-const SPACE = '    ';
+use Funct\Collection;
 
-function stringifyValue($value, $depth)
+const TAB_INDENT = 4;
+const FIRST_INDENT = 2;
+
+function render($data, $depth = 0)
 {
-    $spaceValueKey = SPACE;
-    $spaceByDepth = str_repeat(SPACE, $depth);
+    $indent = genIndent($depth, FIRST_INDENT);
+    $arrResult = array_reduce($data, function ($acc, $value) use ($depth, $indent) {
+        $status = $value['status'];
+        $name = $value['name'];
+        $oldValue = genValue($value['oldValue'], $depth);
+        $newValue = genValue($value['newValue'], $depth);
+        $children = $value['children'];
 
-    $funcs = [
-        'object' => function ($value) use ($spaceValueKey, $spaceByDepth) {
-            $array = get_object_vars($value);
-            $key = array_key_first($array);
-            return "{\n{$spaceValueKey}{$spaceByDepth}{$key}: {$array[$key]}\n{$spaceByDepth}}";
-        },
-        'boolean' => function ($value) {
-            return json_encode($value);
+        switch ($status) {
+            case 'nested':
+                $acc[] = "{$indent}  {$name}: " . render($value['children'], $depth + 1);
+                break;
+            case 'not changed':
+                $acc[] = "{$indent}  {$name}: {$oldValue}";
+                break;
+            case 'deleted':
+                $acc[] = "{$indent}- {$name}: {$oldValue}";
+                break;
+            case 'added':
+                $acc[] = "{$indent}+ {$name}: {$oldValue}";
+                break;
+            case 'changed':
+                $acc[] = "{$indent}+ {$name}: {$newValue}";
+                $acc[] = "{$indent}- {$name}: {$oldValue}";
+                break;
         }
-    ];
+        return $acc;
+    }, []);
 
-    $type = gettype($value);
-    $isFunc = in_array($type, array_keys($funcs));
-    return $isFunc ? $funcs[$type]($value) : $value;
+    $indent = genIndent($depth);
+    $strResult = "{\n" . implode("\n", $arrResult) . $indent . "\n" . $indent . "}";
+    return $strResult;
 }
 
-function stringifyItem($item, $index, $prefix, $depth)
+function genValue($value, $depth)
 {
-    $spaceItemName = str_repeat(SPACE, $depth - 1);
-    $value = stringifyValue($item[$index], $depth);
-    return "{$spaceItemName}  {$prefix} {$item['name']}: {$value}";
+    if (is_array($value)) {
+        $key = key($value);
+        $firstIndent = genIndent($depth, TAB_INDENT * 2);
+        $lastIndent = genIndent($depth, FIRST_INDENT);
+        return "{\n" . $firstIndent . $key . ": " . $value[$key] . "\n" . $lastIndent . "  }";
+    } elseif (is_bool($value)) {
+        return $value ? 'true' : 'false';
+    } else {
+        return $value;
+    }
 }
 
-function format($ast)
+function genIndent($depth, $additionalIndent = 0)
 {
-    $inner = function ($innerData, $depth) use (&$inner) {
-
-        $mapper = function ($child) use ($depth, &$inner) {
-            switch ($child['type']) {
-                case 'unchanged':
-                    return stringifyItem($child, 'valueBefore', ' ', $depth);
-                case 'changed':
-                    $changed[] = stringifyItem($child, 'valueAfter', '+', $depth);
-                    $changed[] = stringifyItem($child, 'valueBefore', '-', $depth);
-                    return join("\n", $changed);
-                case 'removed':
-                    return stringifyItem($child, 'valueBefore', '-', $depth);
-                case 'added':
-                    return stringifyItem($child, 'valueAfter', '+', $depth);
-                case 'nested':
-                    $space = str_repeat(SPACE, $depth);
-                    $items = $inner($child['children'], $depth + 1);
-                    $group = array_merge(["{$space}{$child['name']}: {"], $items, ["{$space}}"]);
-                    return join("\n", $group);
-                default:
-                    throw new \Exception("Type \"{$child['type']}\" not supported.");
-            }
-        };
-        return array_map($mapper, $innerData);
-    };
-
-    $result = $inner($ast, 1);
-    $joined = join("\n", $result);
-    return "{\n{$joined}\n}";
+    $countSpacesIndent = TAB_INDENT * $depth;
+    return str_repeat(' ', $countSpacesIndent + $additionalIndent);
 }

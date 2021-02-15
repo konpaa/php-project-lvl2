@@ -2,7 +2,7 @@
 
 namespace Php\Project\Lvl2\Formatters\json;
 
-function format($ast)
+function render($data)
 {
-    return json_encode($ast, JSON_PRETTY_PRINT);
+    return json_encode($data, JSON_PRETTY_PRINT);
 }

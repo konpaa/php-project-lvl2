@@ -20,12 +20,9 @@
     "autoload":{
         "psr-4": { "Php\\Project\\Lvl2\\": "tests/" },
         "files": [
-            "src/cli.php",
             "src/gendiff.php",
-            "src/readfile.php",
             "src/parsers.php",
-            "src/ast.php",
-            "src/path.php",
+            "src/cli.php",
             "src/Formatters/pretty.php",
             "src/Formatters/plain.php",
             "src/Formatters/json.php"
