@@ -4,7 +4,7 @@ namespace Php\Project\Lvl2\DifferTest;
 
 use PHPUnit\Framework\TestCase;
 
-use function Php\Project\Lvl2\Differ\genDiff;
+use function Php\Project\Lvl2\genDiff;
 
 use const Php\Project\Lvl2\Formatters\FM_JSON;
 use const Php\Project\Lvl2\Formatters\FM_PLAIN;
