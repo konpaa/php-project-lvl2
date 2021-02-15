@@ -32,5 +32,8 @@
         "phpstan/phpstan": "^0.12.76",
         "mikey179/vfsstream": "^1.6",
         "hexlet/phpstan-fp": "^1.1"
+    },
+    "scripts": {
+        "phpcs": "vendor/bin/phpcs"
     }
 }

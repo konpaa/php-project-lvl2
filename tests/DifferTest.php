@@ -14,64 +14,64 @@ class DifferTest extends TestCase
 {
     public function testCompareJson(): void
     {
-        $file1 = 'tests/fixtures/step3/file1.json';
-        $file2 = 'tests/fixtures/step3/file2.json';
+        $file1 = 'tests/fixtures/step3/file1.json.json.json';
+        $file2 = 'tests/fixtures/step3/file2.json.json.json';
         $diff = genDiff($file1, $file2, FM_STYLISH);
         $this->assertStringEqualsFile('tests/fixtures/step3/res.diff', $diff);
     }
 
     public function testCompareYaml(): void
     {
-        $file1 = 'tests/fixtures/step5/file1.yml';
-        $file2 = 'tests/fixtures/step5/file2.yml';
+        $file1 = 'tests/fixtures/step5/file1.json.json.yml';
+        $file2 = 'tests/fixtures/step5/file2.json.json.yml';
         $diff = genDiff($file1, $file2, FM_STYLISH);
         $this->assertStringEqualsFile('tests/fixtures/step5/res.diff', $diff);
     }
 
     public function testCompareJsonRecursive(): void
     {
-        $file1 = 'tests/fixtures/step6/file1.json';
-        $file2 = 'tests/fixtures/step6/file2.json';
+        $file1 = 'tests/fixtures/step5/file1.json.json.json';
+        $file2 = 'tests/fixtures/step5/file2.json.json.json';
         $diff = genDiff($file1, $file2, FM_STYLISH);
-        $this->assertStringEqualsFile('tests/fixtures/step6/res.diff', $diff);
+        $this->assertStringEqualsFile('tests/fixtures/step5/res.diff', $diff);
     }
 
     public function testCompareYamlRecursive(): void
     {
-        $file1 = 'tests/fixtures/step6/file1.yml';
-        $file2 = 'tests/fixtures/step6/file2.yml';
+        $file1 = 'tests/fixtures/step5/file1.json.json.yml';
+        $file2 = 'tests/fixtures/step5/file2.json.json.yml';
         $diff = genDiff($file1, $file2, FM_STYLISH);
-        $this->assertStringEqualsFile('tests/fixtures/step6/res.diff', $diff);
+        $this->assertStringEqualsFile('tests/fixtures/step5/res.diff', $diff);
     }
 
     public function testCompareJsonRecursivePlain(): void
     {
-        $file1 = 'tests/fixtures/step6/file1.json';
-        $file2 = 'tests/fixtures/step6/file2.json';
+        $file1 = 'tests/fixtures/step5/file1.json.json.json';
+        $file2 = 'tests/fixtures/step5/file2.json.json.json';
         $diff = genDiff($file1, $file2, FM_PLAIN);
         $this->assertStringEqualsFile('tests/fixtures/step7/res.diff', $diff);
     }
 
     public function testCompareYamlRecursivePlain(): void
     {
-        $file1 = 'tests/fixtures/step6/file1.yml';
-        $file2 = 'tests/fixtures/step6/file2.yml';
+        $file1 = 'tests/fixtures/step5/file1.json.json.yml';
+        $file2 = 'tests/fixtures/step5/file2.json.json.yml';
         $diff = genDiff($file1, $file2, FM_PLAIN);
         $this->assertStringEqualsFile('tests/fixtures/step7/res.diff', $diff);
     }
 
     public function testCompareJsonRecursiveJson(): void
     {
-        $file1 = 'tests/fixtures/step6/file1.json';
-        $file2 = 'tests/fixtures/step6/file2.json';
+        $file1 = 'tests/fixtures/step5/file1.json.json.json';
+        $file2 = 'tests/fixtures/step5/file2.json.json.json';
         $diff = genDiff($file1, $file2, FM_PLAIN);
         $this->assertStringEqualsFile('tests/fixtures/step7/res.diff', $diff);
     }
 
     public function testCompareYamlRecursiveJson(): void
     {
-        $file1 = 'tests/fixtures/step6/file1.yml';
-        $file2 = 'tests/fixtures/step6/file2.yml';
+        $file1 = 'tests/fixtures/step5/file1.json.json.yml';
+        $file2 = 'tests/fixtures/step5/file2.json.json.yml';
         $diff = genDiff($file1, $file2, FM_JSON);
         $this->assertStringEqualsFile('tests/fixtures/step8/res.diff', $diff);
     }
