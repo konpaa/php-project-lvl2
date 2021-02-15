@@ -1,0 +1,115 @@
+[
+    {
+        "key": "common",
+        "child": {
+            "4": {
+                "key": "follow",
+                "new": false,
+                "status": 2
+            },
+            "0": {
+                "key": "setting1",
+                "old": "Value 1",
+                "new": "Value 1",
+                "status": 1
+            },
+            "1": {
+                "key": "setting2",
+                "old": 200,
+                "status": 3
+            },
+            "2": {
+                "key": "setting3",
+                "old": true,
+                "new": null,
+                "status": 4
+            },
+            "5": {
+                "key": "setting4",
+                "new": "blah blah",
+                "status": 2
+            },
+            "6": {
+                "key": "setting5",
+                "new": {
+                    "key5": "value5"
+                },
+                "status": 2
+            },
+            "3": {
+                "key": "setting6",
+                "child": {
+                    "1": {
+                        "key": "doge",
+                        "child": [
+                            {
+                                "key": "wow",
+                                "old": "",
+                                "new": "so much",
+                                "status": 4
+                            }
+                        ]
+                    },
+                    "0": {
+                        "key": "key",
+                        "old": "value",
+                        "new": "value",
+                        "status": 1
+                    },
+                    "2": {
+                        "key": "ops",
+                        "new": "vops",
+                        "status": 2
+                    }
+                }
+            }
+        }
+    },
+    {
+        "key": "group1",
+        "child": [
+            {
+                "key": "baz",
+                "old": "bas",
+                "new": "bars",
+                "status": 4
+            },
+            {
+                "key": "foo",
+                "old": "bar",
+                "new": "bar",
+                "status": 1
+            },
+            {
+                "key": "nest",
+                "old": {
+                    "key": "value"
+                },
+                "new": "str",
+                "status": 4
+            }
+        ]
+    },
+    {
+        "key": "group2",
+        "old": {
+            "abc": 12345,
+            "deep": {
+                "id": 45
+            }
+        },
+        "status": 3
+    },
+    {
+        "key": "group3",
+        "new": {
+            "deep": {
+                "id": {
+                    "number": 45
+                }
+            },
+            "fee": 100500
+        },
+        "status": 2
+    }
+]
