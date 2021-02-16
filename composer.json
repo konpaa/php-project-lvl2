@@ -20,7 +20,7 @@
     "autoload":{
         "psr-4": { "Php\\Project\\Lvl2\\": "tests/" },
         "files": [
-            "src/DiffGenerator.php",
+            "src/DifferTest.php",
             "src/Parsers/JsonParser.php",
             "src/Parsers/YamlParser.php",
             "src/Parsers.php",
