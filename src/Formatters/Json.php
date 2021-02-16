@@ -1,8 +1,8 @@
 <?php
 
-namespace Php\Project\Lvl2\Formatters\json;
+namespace Php\Project\Lvl2\Formatters\Json;
 
-function format(array $tree): string
+function render(array $data): string
 {
-    return json_encode($tree);
+    return (string) json_encode($data, JSON_PRETTY_PRINT);
 }

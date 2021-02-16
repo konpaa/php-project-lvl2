@@ -1,68 +1,64 @@
 <?php
 
-namespace Php\Project\Lvl2\Formatters\plain;
+namespace Php\Project\Lvl2\Formatters\Plain;
 
-use Error;
+use function Funct\Collection\flattenAll;
 
-use const Php\Project\Lvl2\Differ\TYPE_ADDED;
-use const Php\Project\Lvl2\Differ\TYPE_NESTED;
-use const Php\Project\Lvl2\Differ\TYPE_REMOVED;
-use const Php\Project\Lvl2\Differ\TYPE_UNCHANGED;
-use const Php\Project\Lvl2\Differ\TYPE_CHANGED;
-
-function format(array $tree): string
+/**
+ * @param mixed $value
+ * @return string
+ */
+function stringify($value)
 {
-    $lines = formatLines($tree);
-    return implode("\n", $lines);
+    $typeFormats = [
+        'string' => fn($value) => "'{$value}'",
+        'integer' => fn($value) => (string) $value,
+        'object' => fn($value) => '[complex value]',
+        'array' => fn($value) => '[complex value]',
+        'boolean' => fn($value) => $value ? 'true' : 'false',
+        'NULL' => fn($value) => 'null'
+    ];
+
+    $type = gettype($value);
+
+    return $typeFormats[$type]($value);
 }
 
-function formatLines(array $tree, string $keyPrefix = ''): array
+function generatePlainOutput(array $tree, array $propertyNames): array
 {
-    $formatNode = function ($node) use ($keyPrefix) {
-        $type = $node['type'];
-        $key = formatKey($keyPrefix, $node['name']);
-        $oldValue = $node['oldValue'];
-        $newValue = $node['newValue'];
+    $output = array_map(function ($child) use ($propertyNames) {
+        $name = implode('.', [...$propertyNames, $child['name']]);
 
-        switch ($type) {
-            case TYPE_REMOVED:
-                return "Property '{$key}' was removed";
-            case TYPE_ADDED:
-                $formattedValue = formatValue($newValue);
-                return "Property '{$key}' was added with value: '{$formattedValue}'";
-            case TYPE_CHANGED:
-                $formattedNewValue = formatValue($newValue);
-                $formattedOldValue = formatValue($oldValue);
-                return "Property '{$key}' was changed. From '{$formattedOldValue}' to '{$formattedNewValue}'";
-            case TYPE_UNCHANGED:
-                return null;
-            case TYPE_NESTED:
-                $formattedValues = formatLines($node['children'], $key);
-                $formattedValues = array_filter($formattedValues);
-                return implode("\n", $formattedValues);
+        switch ($child['state']) {
+            case 'added':
+                $value = stringify($child['value']);
+                return "Property '{$name}' was added with value: {$value}";
+
+            case 'removed':
+                return "Property '{$name}' was removed";
+
+            case 'unchanged':
+                return "";
+
+            case 'changed':
+                $oldValue = stringify($child['oldValue']);
+                $newValue = stringify($child['newValue']);
+                return "Property '{$name}' was updated. From {$oldValue} to {$newValue}";
+
+            case 'nested':
+                return generatePlainOutput($child['children'], [...$propertyNames, $child['name']]);
+
+            default:
+                throw new \Exception("Invalid node state: {$child['state']}");
         }
+    }, $tree);
 
-        throw new Error("unknown node type: {$type}");
-    };
+    $filteredOutput = array_filter($output, fn($part) => $part !== '');
 
-    return array_map($formatNode, $tree);
+    return flattenAll($filteredOutput);
 }
 
-function formatKey($prefix, $key): string
+function render(array $data): string
 {
-    if (empty($prefix)) {
-        return $key;
-    }
-    return "{$prefix}.{$key}";
-}
-
-function formatValue($value)
-{
-    if (is_object($value)) {
-        return 'complex value';
-    }
-    if (is_bool($value)) {
-        return $value ? 'true' : 'false';
-    }
-    return $value;
+    return implode("\n", generatePlainOutput($data, []));
 }

@@ -1,34 +1,43 @@
 #!/usr/bin/env php
 <?php
 
-use function Php\Project\Lvl2\Differ\genDiff;
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
 
-$autoloadPathGlobal = __DIR__ . '/../../../autoload.php';
-$autoloadPathLocal = __DIR__ . '/../vendor/autoload.php';
-if (file_exists($autoloadPathGlobal)) {
-    require_once $autoloadPathGlobal;
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
 } else {
-    require_once $autoloadPathLocal;
+    require_once $autoloadPath2;
 }
 
-$doc = <<<DOC
-Usage:
-  gendiff (-h|--help)
-  gendiff (-v|--version)
-  gendiff [--format <fmt>] <firstFile> <secondFile>
+use function Php\Project\Lvl2\Differ\genDiff;
 
-Options:
-  -h --help                     Show this screen
-  -v --version                  Show version
-  --format <fmt>                Report format [default: pretty]
+$doc = <<<DOCOPT
 
-DOC;
+  Generate diff
 
-$args = Docopt::handle($doc, ['version' => 'Generate json.diff 1.5']);
+  Usage:
+    gendiff (-h|--help)
+    gendiff (-v|--version)
+    gendiff [--format <fmt>] <firstFile> <secondFile>
 
-$format = $args['--format'];
-$pathToFile1 = $args['<firstFile>'] ?? null;
-$pathToFile2 = $args['<secondFile>'] ?? null;
+  Options:
+    -h --help                     Show this screen
+    -v --version                  Show version
+    --format <fmt>                Report format [default: stylish]
 
-echo genDiff($pathToFile1, $pathToFile2, $format);
-echo "\n";
+  Report formats:
+    <fmt>
+        pretty                 Show changes in files marked with symbols "+/-" 
+        plain                  Show changes in files explained by the text
+        json                   Show changes in files as a JSON string
+  DOCOPT;
+
+$args = Docopt::handle($doc, array('version'=>'v1.0.0'));
+[
+    '<firstFile>' => $pathToFirstFile,
+    '<secondFile>' => $pathToSecondFile,
+    '--format' => $format
+] = $args;
+$diff = genDiff($pathToFirstFile, $pathToSecondFile, $format);
+print_r($diff);
