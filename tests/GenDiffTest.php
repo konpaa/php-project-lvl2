@@ -4,7 +4,7 @@ namespace Php\Project\Lvl2;
 
 use PHPUnit\Framework\TestCase;
 
-use function Php\Project\Lvl2\Differ\genDiff;
+use function Php\Project\Lvl2\DifferTest\genDiff;
 
 class GenDiffTest extends TestCase
 {
