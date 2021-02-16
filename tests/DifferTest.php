@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 use function Php\Project\Lvl2\DifferTest\genDiff;
 
-class GenDiffTest extends TestCase
+class DifferTest extends TestCase
 {
     private function makeFilepath(string $filename): string
     {
