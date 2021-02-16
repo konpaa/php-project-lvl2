@@ -1,6 +1,6 @@
 <?php
 
-namespace Php\Project\Lvl2\DifferTest;
+namespace Php\Project\Lvl2\Differ;
 
 use function Php\Project\Lvl2\Parsers\parseData;
 use function Php\Project\Lvl2\Formatters\formatData;
