@@ -1,9 +1,9 @@
 <?php
 
-namespace Php\Project\Lvl2\Differ;
+namespace Differ\Differ;
 
-use function Php\Project\Lvl2\Parsers\parseData;
-use function Php\Project\Lvl2\Formatters\formatData;
+use function Differ\Parsers\parseData;
+use function Differ\Formatters\formatData;
 use function Funct\Collection\union;
 use function Funct\Collection\sortBy;
 

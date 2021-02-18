@@ -1,10 +1,10 @@
 <?php
 
-namespace Php\Project\Lvl2\Formatters;
+namespace Differ\Formatters;
 
-use function Php\Project\Lvl2\Formatters\Stylish\render as renderInStylish;
-use function Php\Project\Lvl2\Formatters\Plain\render as renderInPlain;
-use function Php\Project\Lvl2\Formatters\Json\render as renderInJson;
+use function Differ\Formatters\Stylish\render as renderInStylish;
+use function Differ\Formatters\Plain\render as renderInPlain;
+use function Differ\Formatters\Json\render as renderInJson;
 
 function formatData(array $data, string $format): string
 {

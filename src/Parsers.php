@@ -1,9 +1,9 @@
 <?php
 
-namespace Php\Project\Lvl2\Parsers;
+namespace Differ\Parsers;
 
-use function Php\Project\Lvl2\Parsers\parseJson;
-use function Php\Project\Lvl2\Parsers\parseYaml;
+use function Differ\Parsers\parseJson;
+use function Differ\Parsers\parseYaml;
 
 function parseData(string $data, string $parserType): object
 {

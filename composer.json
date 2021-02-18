@@ -15,10 +15,11 @@
     "require": {
         "docopt/docopt": "^1.0",
         "funct/funct": "^1.5",
-        "symfony/yaml": "^5.2"
+        "symfony/yaml": "^5.2",
+        "ext-json": "*"
     },
     "autoload":{
-        "psr-4": { "Php\\Project\\Lvl2\\": "tests/" },
+        "psr-4": { "Differ\\": "tests/" },
         "files": [
             "src/Differ.php",
             "src/Parsers/JsonParser.php",

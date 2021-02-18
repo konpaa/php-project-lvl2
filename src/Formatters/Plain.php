@@ -1,6 +1,6 @@
 <?php
 
-namespace Php\Project\Lvl2\Formatters\Plain;
+namespace Differ\Formatters\Plain;
 
 use function Funct\Collection\flattenAll;
 

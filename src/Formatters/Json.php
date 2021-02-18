@@ -1,6 +1,6 @@
 <?php
 
-namespace Php\Project\Lvl2\Formatters\Json;
+namespace Differ\Formatters\Json;
 
 function render(array $data): string
 {
