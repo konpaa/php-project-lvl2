@@ -3,6 +3,7 @@
 namespace Differ\Formatters;
 
 use Differ\Formatters\Formatters\Formatters;
+
 use function Differ\Formatters\Stylish\render as renderInStylish;
 use function Differ\Formatters\Plain\render as renderInPlain;
 use function Differ\Formatters\Json\render as renderInJson;

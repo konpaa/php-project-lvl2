@@ -51,7 +51,6 @@ class Formatters
         $filteredOutput = array_filter($output, fn($part) => $part !== '');
 
         return flattenAll($filteredOutput);
-
     }
 
     public function generateStylishOutput(array $tree, int $depth = 0): string
@@ -86,10 +85,14 @@ class Formatters
         }, $tree);
 
         return implode("\n", ["{", ...$output, "{$indent}}"]);
-
     }
 
-    public function stringifyStylish(mixed $value, int $depth = 0): string
+    /**
+     * @param mixed $value
+     * @param int $depth
+     * @return string
+     */
+    public function stringifyStylish($value, $depth = 0)
     {
         $stringifyComplexValue = function ($complexValue, $depth): string {
             $indent = str_repeat(' ', self::INDENT_LENGTH * $depth);
@@ -116,7 +119,11 @@ class Formatters
         return $typeFormats[$type]($value);
     }
 
-    public function stringifyPlain(mixed $value): string
+    /**
+     * @param mixed $value
+     * @return string
+     */
+    public function stringifyPlain($value)
     {
         $typeFormats = [
             'string' => fn($value) => "'{$value}'",
