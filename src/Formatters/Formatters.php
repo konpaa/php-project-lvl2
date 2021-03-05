@@ -9,7 +9,7 @@ class Formatters
     public const INDENT_LENGTH = 4;
 
     /**
-     * @param array $value
+     * @param array $data
      * @param string $type
      * @return mixed
      */
