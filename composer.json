@@ -19,7 +19,10 @@
         "ext-json": "*"
     },
     "autoload":{
-        "psr-4": { "Differ\\": "tests/" },
+        "psr-4": {
+            "Differ\\": "tests/" ,
+            "Differ\\Formatters\\": "Formatters/"
+        },
         "files": [
             "src/Differ.php",
             "src/Parsers/JsonParser.php",
