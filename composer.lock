@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc5e288cd04db0b56c9d2b76e181b68a",
+    "content-hash": "11f4510c3f02ad608fd3d9252bbab3db",
     "packages": [
         {
             "name": "docopt/docopt",
@@ -177,7 +177,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -236,7 +236,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.22.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.22.1"
             },
             "funding": [
                 {
@@ -256,16 +256,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v5.2.3",
+            "version": "v5.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "338cddc6d74929f6adf19ca5682ac4b8e109cdb0"
+                "reference": "7d6ae0cce3c33965af681a4355f1c4de326ed277"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/338cddc6d74929f6adf19ca5682ac4b8e109cdb0",
-                "reference": "338cddc6d74929f6adf19ca5682ac4b8e109cdb0",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7d6ae0cce3c33965af681a4355f1c4de326ed277",
+                "reference": "7d6ae0cce3c33965af681a4355f1c4de326ed277",
                 "shasum": ""
             },
             "require": {
@@ -311,7 +311,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v5.2.3"
+                "source": "https://github.com/symfony/yaml/tree/v5.2.4"
             },
             "funding": [
                 {
@@ -327,7 +327,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-03T04:42:09+00:00"
+            "time": "2021-02-22T15:48:39+00:00"
         }
     ],
     "packages-dev": [
@@ -450,16 +450,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.27.0",
+            "version": "v8.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "904b28a184a8e3570e5312e6d0438d7df4b641ce"
+                "reference": "ecc881c6dce66e22f2c236374f342d41c7ebeb67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/904b28a184a8e3570e5312e6d0438d7df4b641ce",
-                "reference": "904b28a184a8e3570e5312e6d0438d7df4b641ce",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/ecc881c6dce66e22f2c236374f342d41c7ebeb67",
+                "reference": "ecc881c6dce66e22f2c236374f342d41c7ebeb67",
                 "shasum": ""
             },
             "require": {
@@ -500,20 +500,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-01-30T19:50:02+00:00"
+            "time": "2021-03-02T13:34:56+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.27.0",
+            "version": "v8.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "b91459a9a0bd0de204c3cae6859ebd02dbcee6c6"
+                "reference": "9c7a9868d7485a82663d67109429094c8e4ed56d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/b91459a9a0bd0de204c3cae6859ebd02dbcee6c6",
-                "reference": "b91459a9a0bd0de204c3cae6859ebd02dbcee6c6",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/9c7a9868d7485a82663d67109429094c8e4ed56d",
+                "reference": "9c7a9868d7485a82663d67109429094c8e4ed56d",
                 "shasum": ""
             },
             "require": {
@@ -548,11 +548,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-01-20T14:18:13+00:00"
+            "time": "2021-02-26T13:17:03+00:00"
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.27.0",
+            "version": "v8.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -823,16 +823,16 @@
         },
         {
             "name": "phar-io/version",
-            "version": "3.0.4",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phar-io/version.git",
-                "reference": "e4782611070e50613683d2b9a57730e9a3ba5451"
+                "reference": "bae7c545bef187884426f042434e561ab1ddb182"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phar-io/version/zipball/e4782611070e50613683d2b9a57730e9a3ba5451",
-                "reference": "e4782611070e50613683d2b9a57730e9a3ba5451",
+                "url": "https://api.github.com/repos/phar-io/version/zipball/bae7c545bef187884426f042434e561ab1ddb182",
+                "reference": "bae7c545bef187884426f042434e561ab1ddb182",
                 "shasum": ""
             },
             "require": {
@@ -868,9 +868,9 @@
             "description": "Library for handling version information and constraints",
             "support": {
                 "issues": "https://github.com/phar-io/version/issues",
-                "source": "https://github.com/phar-io/version/tree/3.0.4"
+                "source": "https://github.com/phar-io/version/tree/3.1.0"
             },
-            "time": "2020-12-13T23:18:30+00:00"
+            "time": "2021-02-23T14:00:09+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -1099,16 +1099,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.76",
+            "version": "0.12.80",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7aaaf9a759a29795e8f46d48041af1c1f1b23d38"
+                "reference": "c6a1b17f22ecf708d434d6bee05092647ec7e686"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7aaaf9a759a29795e8f46d48041af1c1f1b23d38",
-                "reference": "7aaaf9a759a29795e8f46d48041af1c1f1b23d38",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c6a1b17f22ecf708d434d6bee05092647ec7e686",
+                "reference": "c6a1b17f22ecf708d434d6bee05092647ec7e686",
                 "shasum": ""
             },
             "require": {
@@ -1139,7 +1139,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.76"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.80"
             },
             "funding": [
                 {
@@ -1155,7 +1155,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-13T11:47:44+00:00"
+            "time": "2021-02-28T20:22:43+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2811,7 +2811,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-json": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
 }
