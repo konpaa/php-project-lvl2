@@ -8,7 +8,12 @@ class Formatters
 {
     public const INDENT_LENGTH = 4;
 
-    public function render(array $data, string $type): string|bool
+    /**
+     * @param array $value
+     * @param string $type
+     * @return mixed
+     */
+    public function render($data, $type)
     {
         $map = [
             'json' => fn($data) => json_encode($data, JSON_PRETTY_PRINT),
