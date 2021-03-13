@@ -32,7 +32,7 @@ class Formatters
      */
     public function generateOutput($tree, $propertyNames = null, $depth = null)
     {
-        if ($propertyNames) {
+        if (isset($propertyNames)) {
             $output = array_map(function ($child) use ($propertyNames) {
                 $name = implode('.', [...$propertyNames, $child['name']]);
 
@@ -64,7 +64,7 @@ class Formatters
 
             return flattenAll($filteredOutput);
 
-        } elseif ($depth) {
+        } else if (isset($depth)) {
             $indent = str_repeat(' ', self::INDENT_LENGTH * $depth);
             $output = array_map(function ($node) use ($depth, $indent): string {
                 switch ($node['state']) {
@@ -105,7 +105,7 @@ class Formatters
      */
     public function stringify($value, $depth = null)
     {
-        if ($depth) {
+        if (isset($depth)) {
             $stringifyComplexValue = function ($complexValue, $depth): string {
                 $indent = str_repeat(' ', self::INDENT_LENGTH * $depth);
                 $iter = function ($value, $key) use ($depth, $indent): string {
