@@ -18,21 +18,21 @@ class Formatters
         $map = [
             'json' => fn($data) => json_encode($data, JSON_PRETTY_PRINT),
             'plain' => fn($data) => implode("\n", $this->generateOutput($data, [])),
-            'stylish' => fn($data) => $this->generateOutput($data),
+            'stylish' => fn($data) => $this->generateOutput($data, null),
         ];
 
         return $map[$type]($data);
     }
 
-    /**
-     * @param array $tree
-     * @param ?array $propertyNames
-     * @param ?int $depth
-     * @return string|array
-     */
-    public function generateOutput($tree, $propertyNames = null, $depth = null)
+//    /**
+//     * @param array $tree
+//     * @param ?array $propertyNames
+//     * @param ?int $depth
+//     * @return string|array
+//     */
+    public function generateOutput(array $tree, ?array $propertyNames, ?int $depth = 0)
     {
-        if (isset($propertyNames)) {
+        if ($propertyNames !== null) {
             $output = array_map(function ($child) use ($propertyNames) {
                 $name = implode('.', [...$propertyNames, $child['name']]);
 
@@ -64,7 +64,7 @@ class Formatters
 
             return flattenAll($filteredOutput);
 
-        } else if (isset($depth)) {
+        } else if ($depth !== null) {
             $indent = str_repeat(' ', self::INDENT_LENGTH * $depth);
             $output = array_map(function ($node) use ($depth, $indent): string {
                 switch ($node['state']) {
@@ -86,7 +86,7 @@ class Formatters
                         return "{$indent}  - {$node['name']}: {$deleted}\n{$indent}  + {$node['name']}: {$added}";
 
                     case 'nested':
-                        $stylishOutput = $this->generateOutput($node['children'], $depth + 1);
+                        $stylishOutput = $this->generateOutput($node['children'], null, $depth + 1);
                         return "{$indent}    {$node['name']}: {$stylishOutput}";
 
                     default:
@@ -103,9 +103,9 @@ class Formatters
      * @param ?int $depth
      * @return string
      */
-    public function stringify($value, $depth = null)
+    public function stringify($value, $depth = 0)
     {
-        if (isset($depth)) {
+        if ($depth !== null) {
             $stringifyComplexValue = function ($complexValue, $depth): string {
                 $indent = str_repeat(' ', self::INDENT_LENGTH * $depth);
                 $iter = function ($value, $key) use ($depth, $indent): string {
