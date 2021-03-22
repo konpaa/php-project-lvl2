@@ -38,7 +38,7 @@ class Formatters
 
                 switch ($child['state']) {
                     case 'added':
-                        $value = $this->stringify($child['value']);
+                        $value = $this->stringify($child['value'], null);
                         return "Property '{$name}' was added with value: {$value}";
 
                     case 'removed':
@@ -48,8 +48,8 @@ class Formatters
                         return "";
 
                     case 'changed':
-                        $oldValue = $this->stringify($child['oldValue']);
-                        $newValue = $this->stringify($child['newValue']);
+                        $oldValue = $this->stringify($child['oldValue'], null);
+                        $newValue = $this->stringify($child['newValue'], null);
                         return "Property '{$name}' was updated. From {$oldValue} to {$newValue}";
 
                     case 'nested':
@@ -64,7 +64,7 @@ class Formatters
 
             return flattenAll($filteredOutput);
 
-        } else if ($depth !== null) {
+        } else {
             $indent = str_repeat(' ', self::INDENT_LENGTH * $depth);
             $output = array_map(function ($node) use ($depth, $indent): string {
                 switch ($node['state']) {
@@ -98,12 +98,7 @@ class Formatters
         }
     }
 
-    /**
-     * @param mixed $value
-     * @param ?int $depth
-     * @return string
-     */
-    public function stringify($value, $depth = 0)
+    public function stringify($value, ?int $depth): string
     {
         if ($depth !== null) {
             $stringifyComplexValue = function ($complexValue, $depth): string {
