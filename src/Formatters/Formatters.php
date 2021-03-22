@@ -16,7 +16,7 @@ class Formatters
     public function render($data, $type)
     {
         $map = [
-            'json' => fn($data) => json_encode($data, JSON_PRETTY_PRINT),
+            'json' => fn($data) => (string) json_encode($data, JSON_PRETTY_PRINT),
             'plain' => fn($data) => implode("\n", $this->generateOutput($data, [])),
             'stylish' => fn($data) => $this->generateOutput($data, null),
         ];
