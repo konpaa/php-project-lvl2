@@ -6,14 +6,14 @@ use Differ\Formatters\Formatters\Objects\FormattersInterface;
 
 class  Stylish implements FormattersInterface
 {
-    public const INDENT_LENGTH = 4;
+    private const INDENT_LENGTH = 4;
 
     public function render(array $data): string
     {
         return $this->generateOutput($data);
     }
 
-    function generateOutput(array $tree, int $depth = 0): string
+    private function generateOutput(array $tree, int $depth = 0): string
     {
         $indent = $this->getIndent($depth);
         $output = array_map(function ($node) use ($depth, $indent): string {
@@ -47,7 +47,7 @@ class  Stylish implements FormattersInterface
         return implode("\n", ["{", ...$output, "{$indent}}"]);
     }
 
-    function getIndent(int $num): string
+    private function getIndent(int $num): string
     {
         return str_repeat(' ', self::INDENT_LENGTH * $num);
     }
@@ -57,7 +57,7 @@ class  Stylish implements FormattersInterface
      * @param int $depth
      * @return string
      */
-    function stringify($value, $depth)
+    private function stringify($value, $depth)
     {
         $stringifyComplexValue = function ($complexValue, $depth): string {
             $indent = $this->getIndent($depth);

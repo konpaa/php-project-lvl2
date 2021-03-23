@@ -6,7 +6,7 @@ use function Funct\Collection\flattenAll;
 
 class Formatters
 {
-    public const INDENT_LENGTH = 4;
+    private const INDENT_LENGTH = 4;
 
     /**
      * @param array $data

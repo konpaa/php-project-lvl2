@@ -12,7 +12,7 @@ class Plain implements FormattersInterface
         return implode("\n", $this->generateOutput($data, []));
     }
 
-    function generateOutput(array $tree, array $propertyNames): array
+    private function generateOutput(array $tree, array $propertyNames): array
     {
         $output = array_map(function ($child) use ($propertyNames) {
             $name = implode('.', [...$propertyNames, $child['name']]);
@@ -50,7 +50,7 @@ class Plain implements FormattersInterface
      * @param mixed $value
      * @return string
      */
-    function stringify($value)
+    private function stringify($value)
     {
         $typeFormats = [
             'string' => fn($value) => "'{$value}'",
