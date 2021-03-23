@@ -18,7 +18,7 @@ class Formatters
         $map = [
             'json' => fn($data) => (string) json_encode($data, JSON_PRETTY_PRINT),
             'plain' => fn($data) => implode("\n", $this->generateOutput($data, [], null)),
-            'stylish' => fn($data) => $this->generateOutput($data, null, $depth = 0),
+            'stylish' => fn($data) => $this->generateOutput($data, null),
         ];
 
         return $map[$type]($data);
@@ -30,7 +30,7 @@ class Formatters
 //     * @param ?int $depth
 //     * @return string|array
 //     */
-    public function generateOutput(array $tree, ?array $propertyNames, ?int $depth)
+    public function generateOutput(array $tree, ?array $propertyNames, ?int $depth = 0)
     {
         if ($propertyNames !== null) {
             $output = array_map(function ($child) use ($propertyNames) {
@@ -53,7 +53,7 @@ class Formatters
                         return "Property '{$name}' was updated. From {$oldValue} to {$newValue}";
 
                     case 'nested':
-                        return $this->generateOutput($child['children'], [...$propertyNames, $child['name']], null);
+                        return $this->generateOutput($child['children'], [...$propertyNames, $child['name']]);
 
                     default:
                         throw new \Exception("Invalid node state: {$child['state']}");
@@ -98,7 +98,7 @@ class Formatters
         }
     }
 
-    public function stringify($value, ?int $depth): string
+    public function stringify($value, ?int $depth = 0): string
     {
         if ($depth !== null) {
             $stringifyComplexValue = function ($complexValue, $depth): string {
