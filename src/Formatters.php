@@ -9,22 +9,39 @@ use Differ\Formatters\Formatters\Objects\Json;
 
 function formatData(array $data, string $format): string
 {
+    $formatters = [
+        'stylish' => new Stylish(),
+        'plain' => new Plain(),
+        'json' => new Json(),
+    ];
+
+    if (!array_key_exists($format, $formatters)) {
+        throw new \Exception("Unsupported format: {$format}");
+    }
+
+    $formatter = $formatters[$format];
+
+    return $formatter->render($data);
+}
+
+
+function formatData2(array $data, string $format): string
+{
     switch ($format) {
         case 'stylish':
-            $stylishObject = new Stylish();
-            $stylishObject->render($data);
+            $formatter = new Stylish();
             break;
         case 'plain':
-            $plainObject = new Plain();
-            $plainObject->render($data);
+            $formatter = new Plain();
             break;
         case 'json':
-            $jsonObject = new Json();
-            $jsonObject->render($data);
+            $formatter = new Json();
             break;
         default:
             throw new  \Exception("Unsupported format: {$format}");
     }
+
+    return $formatter->render($data);
 }
 
 
